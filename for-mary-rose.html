@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Healing Garden 🌸</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#fff5f7;--card:#ffffffcc;--ink:#4a2c3a;--soft:#8a6577;--pink:#f48fb1;--deep:#d81b60;--line:#f8d3df}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#241820;--card:#33222dcc;--ink:#fbe7ef;--soft:#c9a3b5;--line:#553545}}
+:root[data-theme="dark"]{--bg:#241820;--card:#33222dcc;--ink:#fbe7ef;--soft:#c9a3b5;--line:#553545}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif;line-height:1.6;overflow-x:hidden}
+h1,h2{font-family:'Brush Script MT','Segoe Script',cursive;font-weight:400;margin:0}
+h1{font-size:clamp(2.6rem,10vw,4.5rem);color:var(--deep)}
+h2{font-size:2.1rem;color:var(--deep);text-align:center;margin-bottom:.6rem}
+section{max-width:760px;margin:0 auto;padding:2.5rem 1.2rem;position:relative;z-index:1}
+.hero{text-align:center;padding-top:3.5rem}
+.hero p{color:var(--soft);font-size:1.1rem;max-width:34rem;margin:.8rem auto}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:1.3rem;backdrop-filter:blur(6px);box-shadow:0 8px 24px #f48fb122}
+button{font:inherit;background:var(--deep);color:#fff;border:0;border-radius:99px;padding:.7rem 1.4rem;cursor:pointer}
+button:active{transform:scale(.97)}
+.center{text-align:center}
+.msg{font-size:1.25rem;min-height:4.5rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.grid .card{text-align:center}
+.grid svg{width:70px;height:70px}
+ul{list-style:none;padding:0;margin:0}
+li{padding:.7rem 1rem;margin:.5rem 0;background:var(--card);border-left:5px solid var(--pink);border-radius:12px;display:flex;gap:.6rem;align-items:center;justify-content:space-between}
+.petal{position:fixed;top:-40px;z-index:0;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+.stem{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap}
+.stem svg{width:56px;height:56px;animation:sway 3s ease-in-out infinite}
+@keyframes sway{50%{transform:rotate(8deg)}}
+footer{text-align:center;color:var(--soft);padding:2rem 1rem 3rem}
+@media (prefers-reduced-motion:reduce){.petal,.stem svg{animation:none}#br{transition:none}}
+</style>
+</head>
+<body>
+<section class="hero">
+  <div class="stem" id="row"></div>
+  <h1>For <span id="nm">Mary Rose</span><!-- EDIT: put her name here --></h1>
+  <p>A little garden, made just for you. Here there is rest, strength, and hope. You are not alone. I, your family, and everyone who loves you are right here with you. 💗</p>
+  <button onclick="document.getElementById('bloom').scrollIntoView()">Open your garden 🌷</button>
+</section>
+
+<section id="bloom">
+  <h2>A flower for today</h2>
+  <div class="card center">
+    <div class="msg" id="msg">Tap the button for a flower and a little message, just for you.</div>
+    <div id="one"></div>
+    <button onclick="bloom()">Give me a flower 🌼</button>
+  </div>
+</section>
+
+<section>
+  <h2>You Are Strong, Love</h2>
+  <div class="grid">
+    <div class="card"><div id="f1"></div><p>One day, one step at a time. There's no need to rush. What matters is that you keep going.</p></div>
+    <div class="card"><div id="f2"></div><p>Resting is not giving up. It is part of healing.</p></div>
+    <div class="card"><div id="f3"></div><p>Even on the hard days, your smile is the most beautiful flower.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Proud moments 🏵️</h2>
+  <p class="center" style="color:var(--soft)">Moments I'm so proud of you. Every small win counts.</p>
+  <!-- EDIT HERE: change the text, or copy a whole <li> line to add more moments -->
+  <ul id="list">
+    <li>🌸 You kept going even when you were so tired 💪</li>
+    <li>🌸 You stayed kind and cheerful 🌼</li>
+    <li>🌸 Cutee kaayo ka bisan na admit sa hospital 💗</li>
+    <li>🌸 You motivate me 🤗</li>
+  </ul>
+</section>
+
+<section class="center">
+  <h2>How We Began</h2>
+  <div class="card"><p>We met on Facebook Dating, and since then you have been my greatest joy. I gave you flowers to make you smile, and this website is a flower that never wilts. I won't stop giving you flowers, no matter how long the road is. 🌹</p>
+  <p style="color:var(--soft);font-size:.95rem">And please remember to follow your doctors and nurses. They are our partners in this fight. 🩺</p></div>
+</section>
+
+<footer>Made with love, by Jhoevan. 💐<br><small>A flower every day, until you're back on your feet.</small></footer>
+
+<script>
+const cols=['#f48fb1','#ec407a','#ffb74d','#ba68c8','#ff8a80','#ffd54f','#f06292'];
+function fl(c,s){let p='';for(let i=0;i<8;i++)p+=`<ellipse cx="50" cy="26" rx="11" ry="22" transform="rotate(${i*45} 50 50)"/>`;
+return `<svg viewBox="0 0 100 100" width="${s}" height="${s}" fill="${c}" opacity=".92">${p}<circle cx="50" cy="50" r="12" fill="#ffd66b"/></svg>`}
+const $=id=>document.getElementById(id);
+$('row').innerHTML=cols.slice(0,5).map((c,i)=>fl(c,56).replace('<svg','<svg style="animation-delay:'+i*.4+'s"')).join('');
+$('f1').innerHTML=fl('#f48fb1',70);$('f2').innerHTML=fl('#ba68c8',70);$('f3').innerHTML=fl('#ffb74d',70);
+const msgs=["You are strong. Stronger than you think. 💪","Every moment of rest is a step toward healing. 🌱","I'm proud of you for every day you keep going. 💗","Don't worry, I'm always right here. 🤍","A small step is still a big victory. 🌷","You are the most beautiful flower in my life. 🌸","Rest today, and tomorrow the strength will still be there. ☀️","Your smile is beautiful. Never forget that. 😊"];
+let last=-1;
+function bloom(){let i;do{i=Math.floor(Math.random()*msgs.length)}while(i===last);last=i;
+$('msg').textContent=msgs[i];$('one').innerHTML=fl(cols[Math.floor(Math.random()*cols.length)],110);
+for(let k=0;k<14;k++)petal();}
+function petal(){const d=document.createElement('div');d.className='petal';
+d.style.left=Math.random()*100+'vw';d.style.animationDuration=(5+Math.random()*5)+'s';
+d.innerHTML=fl(cols[Math.floor(Math.random()*cols.length)],14+Math.random()*16);
+document.body.appendChild(d);setTimeout(()=>d.remove(),10500)}
+setInterval(()=>{if(!matchMedia('(prefers-reduced-motion:reduce)').matches)petal()},2500);
+</script>
+</body>
+</html>
